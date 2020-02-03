@@ -63,7 +63,7 @@ Copyright = '(c) 2020 perri. All rights reserved.'
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = @("MIREST.Format.ps1xml")
+FormatsToProcess = @("MIREST.MIT.Format.ps1xml","MIREST.MIA.Format.ps1xml")
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
