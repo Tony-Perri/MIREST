@@ -52,5 +52,49 @@
         </TableRowEntries>
       </TableControl>
     </View>
+    <View>
+      <Name>MIATask</Name>
+      <ViewSelectedBy>
+        <TypeName>MIREST.MIATask</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+        <TableColumnHeader>
+            <Label>Id</Label>
+            <Width>12</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Width>30</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+            <Width>15</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Scheduled</Label>
+            <Width>12</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ID</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TT</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Scheduled</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
   </ViewDefinitions>
 </Configuration>

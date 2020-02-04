@@ -50,19 +50,22 @@ function Get-MIAHost
         $hostTypes = @('FileSystem', 'FTP', 'POP3', 'Share',
                         'siLock', 'SMTP', 'SSHFTP', 'AS1', 'AS2', 'AS3','S3')
 
-        # # Doing this as an array so we can directly modify the items array
+        # Doing this as an array so we can directly modify the items array
         for($i=0; $i -lt $response.items.count; $i++) {
-            # The NoteProperty value should be the actual host "object"
-            # we want which is also the type.
-            $propName = (Get-Member -InputObject $response.items[$i] -MemberType NoteProperty).Name
-
-            # Lets make sure it is one of our host types, just in case
-            if ($propName -in $hostTypes) {
-                $hostObj = $response.items[$i].$propName
-                #Add the name as a Type property to the host object
-                Add-Member -InputObject $hostObj -MemberType NoteProperty -Name Type -Value $propName
-                # Set the items element in the array directly to the hostObj
-                $response.items[$i] = $hostObj
+            # Iterate over each property to find the one that
+            # is one of our host types.  Seems like this only returns
+            # the one NoteProperty, but still doing it this way to be
+            # safe.
+            foreach($prop in $response.items[$i].PSObject.Properties) {
+                $propName = $prop.Name
+                # Let's see if this is the property whose value we want and, if so, ...
+                if ($propName -in $hostTypes) {
+                    $hostObj = $response.items[$i].$propName
+                    #Add the name as a Type property to the host object
+                    Add-Member -InputObject $hostObj -MemberType NoteProperty -Name Type -Value $propName
+                    # Set the items element in the array directly to the hostObj
+                    $response.items[$i] = $hostObj
+                }
             }
         }
         Write-MIAOutput -Response $response -Typename "MIREST.MIAHost"
