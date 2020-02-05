@@ -8,13 +8,14 @@ function Write-MIAOutput
         [string]$Typename
     )
 
-    #Determine if the response contains paging information
-    $isPaged = ($Response.paging)
 
-    if ($isPaged) {
+    if ($Response.psobject.properties['paging']) {
         Write-Host "Total items: $($Response.paging.totalItems)"
         Write-Host "Items per page: $($Response.paging.perPage)"
         Write-Host "Displaying Page: $($Response.paging.page) of $($Response.paging.totalPages)"
+        $results = $Response.items
+    }
+    elseif ($Response.psobject.properties['items']) {
         $results = $Response.items
     }
     else {

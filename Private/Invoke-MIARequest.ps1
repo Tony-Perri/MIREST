@@ -12,15 +12,21 @@ function Invoke-MIARequest
         [hashtable]$Query
     )
 
-    $params = @{
-        Uri = "https://$Hostname/api/v1/$Resource"
-        Method = "$Method"
-        Headers = @{
+
+    $Uri = "https://$Hostname/api/v1/$Resource"
+    $Headers = @{
             Accept = "application/json"
             Authorization = "Bearer $Token"
         }
+
+    if ($Method -eq 'POST') {
+        $Headers.Add("Content-Type", "application/json")
+        $body = ConvertTo-Json $Query
+    }
+    else {
+        $body = $Query
     }
 
-    $response = Invoke-RestMethod @params -Body $Query
+    $response = Invoke-RestMethod -Uri $Uri -Method $Method -Headers $Headers -Body $body
     Write-Output $response
 }
