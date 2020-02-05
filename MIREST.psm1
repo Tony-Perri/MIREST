@@ -1,4 +1,4 @@
-$PublicFunctions = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
+$PublicFunctions = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Depth 2 -ErrorAction SilentlyContinue)
 $PrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
 
 #Dot source the files
