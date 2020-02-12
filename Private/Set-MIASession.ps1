@@ -7,9 +7,17 @@ function Set-MIASession
     [CmdletBinding()]
     param (
         [string]$Hostname,
-        [string]$Token
+        [psobject]$Response
     )
 
-    $Script:MIAHostname = $Hostname
-    $Script:MIAToken = $Token
+    $Script:MIASession = [PSCustomObject]@{
+        Hostname = $Hostname
+        Token = $Response.access_token
+        CreatedAt = $(Get-Date)
+        ExpiresIn = $(New-Timespan -Seconds $Response.expires_in)
+        RefreshToken = $Response.refresh_token
+    }
+
+    #$Script:MIAHostname = $Hostname
+    #$Script:MIAToken = $Response.access_token
 }

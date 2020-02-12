@@ -7,16 +7,18 @@ function Invoke-MIARequest
     param(
         [string]$Resource,
         [string]$Method = 'GET',
-        [string]$Hostname = $Script:MIAHostname,
-        [string]$Token = $Script:MIAToken,
         [hashtable]$Query
     )
 
+    RefreshMIASessionIfNeeded
 
-    $Uri = "https://$Hostname/api/v1/$Resource"
+    $hostname = $Script:MIASession.Hostname
+    $token = $Script:MIASession.Token
+
+    $Uri = "https://$hostname/api/v1/$Resource"
     $Headers = @{
             Accept = "application/json"
-            Authorization = "Bearer $Token"
+            Authorization = "Bearer $token"
         }
 
     if ($Method -eq 'POST') {

@@ -16,5 +16,5 @@ function Connect-MIAServer
     }
 
     $response = Invoke-RestMethod @params
-    Set-MIASession -Hostname $Hostname -Token $response.access_token
+    Set-MIASession -Hostname $Hostname -Response $response
 }
