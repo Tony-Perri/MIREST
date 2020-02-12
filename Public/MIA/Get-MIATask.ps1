@@ -7,32 +7,51 @@ function Get-MIATask
                     ParameterSetName='Detail')]
         [string]$Id,
 
+        [Parameter(Mandatory,
+                    ParameterSetName='Running')]
+        [switch]$Running,
+
         [Parameter(Mandatory=$false,
                     ParameterSetName='List')]
+        [Parameter(Mandatory=$false,
+                    ParameterSetName='Running')]
         [string]$Name,
 
         [Parameter(Mandatory=$false,
                     ParameterSetName='List')]
+        [Parameter(Mandatory=$false,
+                    ParameterSetName='Running')]
         [string]$Fields,
 
         [Parameter(Mandatory=$false,
                     ParameterSetName='List')]
+        [Parameter(Mandatory=$false,
+                    ParameterSetName='Running')]
         [int32]$Page,
 
         [Parameter(Mandatory=$false,
                     ParameterSetName='List')]
+        [Parameter(Mandatory=$false,
+                    ParameterSetName='Running')]
         [int32]$PerPage
 
     )
 
-    if ('Detail' -eq $PSCmdlet.ParameterSetName) {
-        $response = Invoke-MIARequest -Resource "tasks/$Id"
-        Write-MIAOutput -Response $response -Typename 'MIREST.MIATask'
-    }
-    else {
-        $query = BuildQueryFromPSBoundParameters($PSBoundParameters)
-        $response = Invoke-MIARequest -Resource "tasks" -Query $query
-        Write-MIAOutput -Response $response -Typename "MIREST.MIATask"
+    switch ($PSCmdlet.ParameterSetName) {
+        'Detail' {
+            $response = Invoke-MIARequest -Resource "tasks/$Id"
+            Write-MIAOutput -Response $response -Typename 'MIREST.MIATask'
+        }
+        'Running' {
+            $query = BuildQueryFromPSBoundParameters($PSBoundParameters)
+            $response = Invoke-MIARequest -Resource "tasks/running" -Query $query
+            Write-MIAOutput -Response $response -Typename "MIREST.MIATaskRunning"
+        }
+        'List' {
+            $query = BuildQueryFromPSBoundParameters($PSBoundParameters)
+            $response = Invoke-MIARequest -Resource "tasks" -Query $query
+            Write-MIAOutput -Response $response -Typename "MIREST.MIATask"
+        }
     }
 
 
