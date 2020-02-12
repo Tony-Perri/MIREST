@@ -1,10 +1,13 @@
 function Get-MIAReport
 {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='TaskRun')]
     param (
-        [Parameter(Mandatory,
+        # Default to a TaskRun report if no parameters are specified.  Even though
+        # the switch if false, it is only used to select the correct
+        # parameter set.
+        [Parameter(Mandatory=$false,
                     ParameterSetName='TaskRun')]
-        [switch]$TaskRun,
+        [switch]$TaskRun=$false,
 
         [Parameter(Mandatory,
                     ParameterSetName='FileActivity')]
