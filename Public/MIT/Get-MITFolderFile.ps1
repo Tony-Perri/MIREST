@@ -38,7 +38,10 @@ function Get-MITFolderFile
     switch ($PSCmdlet.ParameterSetName)
     {
         'List' {
-            $query = BuildQueryFromPSBoundParameters($PSBoundParameters)
+            #Need to exclude "Id" from the parameters used for the query string
+            $limitedParameters = $PSBoundParameters
+            $limitedParameters.Remove('Id') | Out-Null
+            $query = BuildQueryFromPSBoundParameters($limitedParameters)
             $response= Invoke-MITRequest -Resource "folders/$Id/files" -Query $query
             Write-MITOutput -Response $response -Typename 'MIREST.MITFileSimple'
         }
