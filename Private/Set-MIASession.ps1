@@ -14,7 +14,7 @@ function Set-MIASession
         Hostname = $Hostname
         Token = $Response.access_token
         CreatedAt = $(Get-Date)
-        ExpiresIn = $(New-Timespan -Seconds $Response.expires_in)
+        ExpiresIn = $Response.expires_in
         RefreshToken = $Response.refresh_token
     }
 

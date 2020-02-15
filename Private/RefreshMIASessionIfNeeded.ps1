@@ -1,9 +1,11 @@
 function RefreshMIASessionIfNeeded
 {
     $elapsed = New-TimeSpan -Start $Script:MIASession.CreatedAt
-    Write-Host "Session at $($elapsed) of $($Script:MIASession.ExpiresIn)"
+    Write-Host "Session at $($elapsed.TotalSeconds) of $($Script:MIASession.ExpiresIn)"
 
-    if ($elapsed -gt $Script:MIASession.ExpiresIn) {
+    # If the key is within 30 seconds of expiring, let's go ahead and
+    # refresh it.
+    if ($elapsed.TotalSeconds -gt $Script:MIASession.ExpiresIn - 30) {
 
         Write-Host "Session expired, refreshing..."
 
