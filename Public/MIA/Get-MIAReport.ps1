@@ -45,7 +45,7 @@ function Get-MIAReport
                 maxCount = "$MaxCount"
             }
 
-            $response = Invoke-MIARequest -Resource 'reports/taskruns' -Method 'Post' -Query $query
+            $response = Invoke-MIARequest -Resource 'reports/taskruns' -Method 'Post' -Body $query
             Write-MIAOutput -Response $response -Typename 'MIREST.MIAReportTaskRun'
         }
 
@@ -64,7 +64,7 @@ function Get-MIAReport
                 maxCount = "$MaxCount"
             }
 
-            $response = Invoke-MIARequest -Resource 'reports/fileactivity' -Method 'Post' -Query $query
+            $response = Invoke-MIARequest -Resource 'reports/fileactivity' -Method 'Post' -Body $query
             Write-MIAOutput -Response $response -Typename 'MIREST.MIAReportFileActivity'
         }
 
@@ -83,7 +83,7 @@ function Get-MIAReport
                 maxCount = "$MaxCount"
             }
 
-            $response = Invoke-MIARequest -Resource 'reports/audit' -Method 'Post' -Query $query
+            $response = Invoke-MIARequest -Resource 'reports/audit' -Method 'Post' -Body $query
             Write-MIAOutput -Response $response -Typename 'MIREST.MIAReportAudit'
         }
     }
