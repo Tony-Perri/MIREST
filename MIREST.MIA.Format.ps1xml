@@ -175,6 +175,10 @@
             <Width>12</Width>
             <Alignment>Right</Alignment>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+            <Width>35</Width>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -210,6 +214,9 @@
                             { "{0} B" -f $_}
                   }
                 </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>StatusMsg</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
