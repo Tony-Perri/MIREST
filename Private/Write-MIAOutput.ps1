@@ -3,9 +3,11 @@ function Write-MIAOutput
     [CmdletBinding()]
     param (
         #Response from Invoke-RESTMethod.  Might include paging information
+        [Parameter(Mandatory)]
+        [ValidateNotNull()]
         [psobject]$Response,
         #Typename to change output objects to for formatting
-        [string]$Typename
+        [string]$Typename = ""
     )
 
 
