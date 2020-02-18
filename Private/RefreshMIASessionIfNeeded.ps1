@@ -1,13 +1,13 @@
 function RefreshMIASessionIfNeeded
 {
     $elapsed = New-TimeSpan -Start $Script:MIASession.CreatedAt
-    Write-Host "Session at $($elapsed.TotalSeconds) of $($Script:MIASession.ExpiresIn)"
+    Write-Verbose "MIA Session at $($elapsed.TotalSeconds) of $($Script:MIASession.ExpiresIn)"
 
     # If the key is within 30 seconds of expiring, let's go ahead and
     # refresh it.
     if ($elapsed.TotalSeconds -gt $Script:MIASession.ExpiresIn - 30) {
 
-        Write-Host "Session expired, refreshing..."
+        Write-Verbose "Session expired, refreshing..."
 
         $params = @{
             Uri = "https://$($Script:MIASession.Hostname)/api/v1/token"
