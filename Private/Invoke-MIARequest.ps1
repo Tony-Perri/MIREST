@@ -7,7 +7,8 @@ function Invoke-MIARequest
     param(
         [string]$Resource,
         [string]$Method = 'GET',
-        [hashtable]$Query
+        [hashtable]$Query,
+        [psobject]$Body
     )
 
     RefreshMIASessionIfNeeded
@@ -21,9 +22,9 @@ function Invoke-MIARequest
             Authorization = "Bearer $token"
         }
 
-    if ($Method -eq 'POST') {
+    if ($Method -in 'POST', 'PUT') {
         $Headers.Add("Content-Type", "application/json")
-        $body = ConvertTo-Json $Query
+        $body = ConvertTo-Json -Depth 10 $Body
     }
     else {
         $body = $Query
