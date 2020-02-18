@@ -5,7 +5,8 @@ function Get-MIATask
         [Parameter(Mandatory,
                     ValueFromPipelineByPropertyName=$true,
                     ParameterSetName='Detail')]
-        [string]$Id,
+        [Alias('Id')]
+        [string]$TaskId,
 
         [Parameter(Mandatory,
                     ParameterSetName='Running')]
@@ -39,7 +40,7 @@ function Get-MIATask
 
     switch ($PSCmdlet.ParameterSetName) {
         'Detail' {
-            $response = Invoke-MIARequest -Resource "tasks/$Id"
+            $response = Invoke-MIARequest -Resource "tasks/$TaskId"
             Write-MIAOutput -Response $response -Typename 'MIREST.MIATask'
         }
         'Running' {

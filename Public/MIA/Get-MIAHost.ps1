@@ -5,7 +5,8 @@ function Get-MIAHost
         [Parameter(Mandatory,
                     ValueFromPipelineByPropertyName=$true,
                     ParameterSetName='Detail')]
-        [string]$Id,
+        [Alias('Id')]
+        [string]$HostId,
 
         [Parameter(Mandatory=$false,
                     ParameterSetName='List')]
@@ -32,7 +33,7 @@ function Get-MIAHost
     )
 
     if ('Detail' -eq $PSCmdlet.ParameterSetName) {
-        $response = Invoke-MIARequest -Resource "hosts/$Id"
+        $response = Invoke-MIARequest -Resource "hosts/$HostId"
         Write-MIAOutput -Response $response -Typename 'MIREST.MIAHost'
     }
     else {
