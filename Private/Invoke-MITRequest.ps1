@@ -7,20 +7,29 @@ function Invoke-MITRequest
     param(
         [string]$Resource,
         [string]$Method = 'GET',
-        [string]$Hostname = $Script:MITHostname,
-        [string]$Token = $Script:MITToken,
-        [hashtable]$Query
+        [hashtable]$Query,
+        [psobject]$Body
     )
 
-    $params = @{
-        Uri = "https://$Hostname/api/v1/$Resource"
-        Method = "$Method"
-        Headers = @{
+    #RefreshMITSessionIfNeeded
+
+    $hostname = $Script:MITHostname
+    $token = $Script:MITToken
+
+    $Uri = "https://$hostname/api/v1/$Resource"
+    $Headers = @{
             Accept = "application/json"
-            Authorization = "Bearer $Token"
+            Authorization = "Bearer $token"
         }
+
+    if ($Method -in 'POST', 'PUT', 'PATCH') {
+        $Headers.Add("Content-Type", "application/json")
+        $body = ConvertTo-Json -Depth 10 $Body
+    }
+    else {
+        $body = $Query
     }
 
-    $response = Invoke-RestMethod @params -Body $Query
+    $response = Invoke-RestMethod -Uri $Uri -Method $Method -Headers $Headers -Body $body
     Write-Output $response
 }
