@@ -17,8 +17,12 @@
             <Width>18</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Realname</Label>
+            <Label>Full Name</Label>
             <Width>24</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Permission</Label>
+            <Width>10</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Status</Label>
@@ -38,7 +42,10 @@
                 <PropertyName>username</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>realname</PropertyName>
+                <PropertyName>fullname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>permission</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>status</PropertyName>
