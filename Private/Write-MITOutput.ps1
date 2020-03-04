@@ -8,13 +8,14 @@ function Write-MITOutput
         [string]$Typename
     )
 
-    #Determine if the response contains paging information
-    $isPaged = ($Response.paging)
-
-    if ($isPaged) {
-        Write-Host "Total items: $($Response.paging.totalItems)"
-        Write-Host "Items per page: $($Response.paging.perPage)"
-        Write-Host "Displaying Page: $($Response.paging.page) of $($Response.paging.totalPages)"
+    #Determine if the response contains paging information and, if so, if it should be display.
+    if (($Response.psobject.properties['paging']) -and ($Response.paging.totalPages -gt 1)) {
+        Write-Host -NoNewLine -ForegroundColor Green "Total items: $($Response.paging.totalItems)  "
+        Write-Host -NoNewLine -ForegroundColor Green "Items per page: $($Response.paging.perPage)  "
+        Write-Host -ForeGroundColor Green "Displaying Page: $($Response.paging.page) of $($Response.paging.totalPages)"
+        $results = $Response.items
+    }
+    elseif ($Response.psobject.properties['items']) {
         $results = $Response.items
     }
     else {

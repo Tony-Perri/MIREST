@@ -12,9 +12,9 @@ function Write-MIAOutput
 
 
     if (($Response.psobject.properties['paging']) -and ($Response.paging.perPage -lt [Int32]::MaxValue)) {
-        Write-Host "Total items: $($Response.paging.totalItems)"
-        Write-Host "Items per page: $($Response.paging.perPage)"
-        Write-Host "Displaying Page: $($Response.paging.page) of $($Response.paging.totalPages)"
+        Write-Host -NoNewLine -ForegroundColor Green "Total items: $($Response.paging.totalItems)  "
+        Write-Host -NoNewLine -ForegroundColor Green "Items per page: $($Response.paging.perPage)  "
+        Write-Host -ForegroundColor Green "Displaying Page: $($Response.paging.page) of $($Response.paging.totalPages)"
         $results = $Response.items
     }
     elseif ($Response.psobject.properties['items']) {
