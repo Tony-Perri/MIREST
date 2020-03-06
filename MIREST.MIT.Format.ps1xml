@@ -239,6 +239,101 @@
       </TableControl>
     </View>
     <View>
+      <Name>MITFolderAcl</Name>
+      <ViewSelectedBy>
+        <TypeName>MIREST.MITFolderAcl</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Read</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Write</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+           <TableColumnHeader>
+            <Label>Delete</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>List</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Notify</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Subs</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Share</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>List Users</Label>
+            <Width>11</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Admin</Label>
+            <Width>7</Width>
+            <Alignment>Center</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.readFiles) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.writeFiles) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.deleteFiles) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.listFiles) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.notify) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.addDeleteSubfolders) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.share) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.listUsers) { "X" }</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if ($_.permissions.admin) { "X" }</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>MITTransferStatus</Name>
       <ViewSelectedBy>
         <TypeName>MIREST.MITTransferStatus</TypeName>
